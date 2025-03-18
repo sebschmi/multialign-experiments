@@ -1,0 +1,7 @@
+/statistics
+/debug
+/local_inputs
+/data
+/.snakemake
+/logs
+/.logdir

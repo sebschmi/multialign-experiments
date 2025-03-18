@@ -1,0 +1,18 @@
+software-deployment-method: "conda"
+executor: slurm
+latency-wait: 60
+default-resources:
+  - clusters="ukko"
+  - slurm_partition="short,medium,bigmem,aurinko"
+  - slurm_extra="--signal=SIGINT@300"
+  - runtime=60
+  - mem_mb=1000
+rerun-incomplete: true
+printshellcmds: true
+jobs: 1000
+cores: 100000
+local-cores: 8
+config: "datadir=/wrk-vakka/users/sebschmi/multialign"
+keep-going: true
+scheduler: "greedy" # ILP creates files in bad locations, possibly leading to a lockup of the Lustre file system
+shadow-prefix: "/wrk-vakka/users/sebschmi/multialign"

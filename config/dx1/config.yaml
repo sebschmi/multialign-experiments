@@ -1,0 +1,3 @@
+default-resources: [benchmark=1]
+rerun-incomplete: True
+keep-going: True
