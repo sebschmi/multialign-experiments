@@ -61,6 +61,8 @@ rule extract_emerald_zip:
     input:  EMERALD_ZIP,
     output: directory(EMERALD_DIR),
     conda:  "config/conda-extract-env.yml"
+    resources:
+            mem_mb = 10_000,
     shell:  """
         unzip -u '{input}' -d '{output}'
         """
