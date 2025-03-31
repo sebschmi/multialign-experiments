@@ -37,6 +37,7 @@ workflow.global_resources["download"] = 4
 
 DOWNLOAD_DIR = os.path.join(DATADIR, "downloads")
 EMERALD_ZIP = os.path.join(DOWNLOAD_DIR, "emerald.zip")
+EMERALD_DIR = os.path.join(DOWNLOAD_DIR, "emerald")
 
 SOFTWARE_DIR = os.path.join(DATADIR, "software")
 MULTIALIGN_DIR = os.path.join(SOFTWARE_DIR, "multialign")
@@ -50,11 +51,19 @@ MULTIALIGN_BINARY = os.path.join(MULTIALIGN_DIR, "target", "release", "multialig
 localrules: report_all
 rule report_all:
     input:  multialign = MULTIALIGN_BINARY,
-            downloads = EMERALD_ZIP,
+            downloads = EMERALD_DIR,
 
 #================================================
 #=== DOWNLOADS ==================================
 #================================================
+
+rule extract_emerald_zip:
+    input:  EMERALD_ZIP,
+    output: directory(EMERALD_DIR),
+    conda:  "config/conda-extract-env.yml"
+    shell:  """
+        unzip -u '{input}' -d '{output}'
+        """
 
 localrules: download_emerald_zip
 rule download_emerald_zip:
