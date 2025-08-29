@@ -36,8 +36,6 @@ NORMAL_THREADS = 56
 workflow.global_resources["cargo_fetch"] = 1
 workflow.global_resources["download"] = 4
 
-DATASET_DIR = os.path.join(DATADIR, "datasets")
-
 DOWNLOAD_DIR = os.path.join(DATADIR, "downloads")
 EMERALD_ZIP = os.path.join(DOWNLOAD_DIR, "emerald.zip")
 EMERALD_DIR = os.path.join(DOWNLOAD_DIR, "emerald")
@@ -55,21 +53,6 @@ localrules: report_all
 rule report_all:
     input:  multialign = MULTIALIGN_BINARY,
             downloads = EMERALD_DIR,
-            datasets = os.path.join(DATASET_DIR, "40046686"),
-
-#================================================
-#=== DATASETS ===================================
-#================================================
-
-rule extract_40046686:
-    input:  os.path.join(LOCAL_INPUT_DIR, "40046686")
-    output: directory(os.path.join(DATASET_DIR, "40046686"))
-    conda:  "config/conda-extract-env.yml"
-    resources:
-            mem_mb = 10_000,
-    shell:  """
-        unzip -u '{input}' -d '{output}'
-        """
 
 #================================================
 #=== DOWNLOADS ==================================
