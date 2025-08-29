@@ -57,6 +57,7 @@ mkdir -p "$TMPDIR"
 echo "Creating jobs"
 
 echo "Arguments: $@" >> "$LOGDIR/run_on_turso.log"
+echo "Start time: $(date +"%FT%R:%S")" >> "$LOGDIR/run_on_turso.log"
 nohup snakemake --profile config/turso "$@" >> "$LOGDIR/run_on_turso.log" 2>&1 &
 
 echo "Started snakemake in background with PID $!"
