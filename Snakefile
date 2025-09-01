@@ -63,7 +63,7 @@ rule extract_emerald_zip:
     output: directory(EMERALD_DIR),
     conda:  "config/conda-extract-env.yml"
     resources:
-            runtime = 180,
+            runtime = 1440,
             mem_mb = 10_000,
     shell:  """
         unzip -u '{input}' -d '{output}'
